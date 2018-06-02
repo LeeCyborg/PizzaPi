@@ -1,4 +1,4 @@
-var checkTimer = 200;
+var checkTimer = 2000;
 
 function checkProgress() {
 	var syncObject = web3.eth.syncing;
@@ -8,7 +8,7 @@ function checkProgress() {
 
 
 	if(syncObject) {
-		var totalSyncPercent = syncObject.highestBlock / syncObject.currentBlock;
+		var totalSyncPercent =(syncObject.currentBlock / syncObject.highestBlock) * 100;
 		var totalSyncText    = "Total sync:    " + totalSyncPercent;
 		var highBlockText    = "Top Block:     " + syncObject.highestBlock;
 		var currBlockText    = "Current Block: " + syncObject.currentBlock;
@@ -24,5 +24,5 @@ function checkProgress() {
 	return outText;    
 }
 
-var checkTimeout = setTimeout(function(){console.log(checkProgress())}, checkTimer);
+var checkTimeout = setInterval(function(){console.log(checkProgress())}, checkTimer);
 
